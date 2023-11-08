@@ -12,11 +12,14 @@ function tarea () {
     alert("Bueno, cuando quieras puedes volver y agregar una nueva tarea");  
 }  
 }
+
+
+if (DELETE === "si") {
+    alert ("Tu tarea se elimino correctamente");
+} else {
+    alert ("Esta tarea todavia esta pendiente");
+}
+
 tarea ()
 
 
-if (DELETE == "si") {
-    alert("Tu tarea se elimino correctamente");
-} else {
-    alert("Esta tarea todavia esta pendiente");
-}

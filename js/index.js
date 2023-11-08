@@ -1,3 +1,23 @@
+/*** Condicional  ***/
+
+const NUMERO_SECRETO = 8;
+let intentos = 0;
+let tuRespuesta ;
+
+while (tuRespuesta !== NUMERO_SECRETO){
+    tuRespuesta = parseInt(prompt("Ingresa un numero. Pista: es el sexto numero de fibonacci"));
+    console.log(intentos++);
+
+    if (tuRespuesta !== NUMERO_SECRETO){
+    alert("Segui probando");
+    }
+}
+alert("Felicitaciones, sos groso")
+
+
+
+/*** Para el Proyecto Final  ***/
+
 const NEW_TASK="";
 let continuar;
 const DELETE = prompt("Deseas eliminar esta tarea, contesta si o no").toLowerCase();

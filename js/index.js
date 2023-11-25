@@ -74,3 +74,11 @@ PRODUCTOS.forEach(CargarProductos => {
     `
     cards.appendChild(div)
 })
+
+
+
+/*** FOOTER ***/
+
+const year = document.querySelector('#current_year');
+
+year.innerHTML = new Date().getFullYear();

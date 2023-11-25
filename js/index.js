@@ -18,7 +18,7 @@ alert("Felicitaciones, sos groso")
 
 /*** Para el Proyecto Final  ***/
 
-const NEW_TASK="";
+let NEW_TASK="";
 let continuar;
 const DELETE = prompt("Deseas eliminar esta tarea, contesta si o no").toLowerCase();
 
@@ -28,18 +28,15 @@ function tarea () {
     NEW_TASK =="";
     continuar = prompt("quieres agregar una nueva tarea").toLowerCase();
 
-}while (continuar === "si"); {
+}while (continuar === "si");
     alert("Bueno, cuando quieras puedes volver y agregar una nueva tarea");  
-}  
+
 }
 
+tarea ()
 
 if (DELETE === "si") {
     alert ("Tu tarea se elimino correctamente");
 } else {
     alert ("Esta tarea todavia esta pendiente");
 }
-
-tarea ()
-
-

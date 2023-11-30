@@ -54,7 +54,7 @@ BTN_ENTER.addEventListener ('click',(e) =>{
     INPUT.reset();
 });
 
-document.addEventListener ('keyup', function(e) {
+document.addEventListener ('keydown', function(e) {
     e.preventDefault();
    if (e.key == 'Enter'){
     const TASK = INPUT.value
@@ -67,6 +67,6 @@ document.addEventListener ('keyup', function(e) {
         });
     };
     id ++;
-    INPUT.reset();  
+    INPUT.value ="";  
 } 
 })

@@ -72,3 +72,9 @@ footer{
     justify-content: center;
     align-items: center;
 }
+
+/* Dark Mode*/
+
+.darkMode {
+    background-image: linear-gradient(to bottom, #2f1c4c, #3d2055, #4c255e, #5b2866, #6b2c6e, #77296a, #832565, #8d225f, #911b4d, #90193a, #8c1d28, #852416);
+}

@@ -1,84 +1,72 @@
-/*** Condicional  ***/
+/** PROYECTO FIANL **/
 
-/** const NUMERO_SECRETO = 8;
-let intentos = 0;
-let tuRespuesta ;
+// VARIABLES 
 
-while (tuRespuesta !== NUMERO_SECRETO){
-    tuRespuesta = parseInt(prompt("Ingresa un numero. Pista: es el sexto numero de fibonacci"));
-    console.log(intentos++);
+const DATE = document.querySelector('#date');
+const LIST_CONT = document.querySelector('#list');
+const ELEMENT = document.querySelector('#element');
+const INPUT = document.querySelector('#input');
+const BTN_ENTER = document.querySelector('#btnEnter');
 
-    if (tuRespuesta !== NUMERO_SECRETO){
-    alert("Segui probando");
-    }
-}
-alert("Felicitaciones, sos groso") **/
+let list = [];
 
+let id; 
 
+/** FUNCION FECHA DEL DIA **/
 
-/*** Para el Proyecto Final  ***/
-
-let newTask="";
-let continuar;
-
-function tarea () {
-    do {
-    const newTask = prompt("Ingresa una nueva tarea");
-    newTask =="";
-    continuar = prompt("quieres agregar una nueva tarea").toLowerCase();
-
-}while (continuar === "si");
-    alert("Bueno, cuando quieras puedes volver y agregar una nueva tarea");  
-
-}
-
-tarea ()
-
-const DELETE = prompt("Deseas eliminar esta tarea, contesta si o no").toLowerCase();
-
-if (DELETE === "si") {
-    alert ("Tu tarea se elimino correctamente");
-} else {
-    alert ("Esta tarea todavia esta pendiente");
-}
+const TODAY = new Date();
+DATE.innerHTML = TODAY.toLocaleDateString ('es-AR', {weekday: 'long', day: "numeric", month:'long'});
 
 
-/*** Productos y cards para cumplir con la segunda pre-entrega ***/
+/** FUNCION AGREGAR TAREA **/
 
-class CargarProductos {
-    constructor(img, producto, marca, precio){
-        this.img = img;
-        this.producto = producto,
-        this.marca = marca,
-        this.precio = precio;
-    }
-}
+function newTask (task, id, delet) {
+    if(delet){return};    // delete es palabra reservada, me volvi chango hasta saber por que no me funcionaba
+
+    const ELEMENT = `
+                <li id="element">
+                <p>${task}</p>
+                <i class="fas fa-trash de" data="eliminado" id="${id}"></i> 
+                </li>
+            `
+            LIST_CONT.insertAdjacentHTML("beforeend", ELEMENT);
+};
 
 
-const ANOTADOR = new CargarProductos("../assets/img/anotador_husares.webp","Anotardor", "Husares", 1500);
-const LAPICERA = new CargarProductos("../assets/img/lapicera_paper_mate.webp", "Lapicera", "Paper Mate", 950);
-const CORRECTOR = new CargarProductos("../assets/img/corrector_liquid_paper.webp", "Corrector","Liquid Paper", 1200);
+/** FUNCION ELIMINAR TAREA **/
 
-const PRODUCTOS = [ANOTADOR, LAPICERA, CORRECTOR];
 
-PRODUCTOS.forEach(CargarProductos => {
-    let div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
-                    <img src="${CargarProductos.img}"  alt="...">
-                    <div>
-                        <h5>${CargarProductos.producto}</h5>
-                        <p>${CargarProductos.marca}</p>
-                        <p>${CargarProductos.precio}</p>
-                    </div>
-    `
-    cards.appendChild(div)
+/** ESCUCHA DEL BOTON Y EL ENTER **/
+
+BTN_ENTER.addEventListener ('click',(e) =>{
+    e.preventDefault();
+    
+    const TASK = INPUT.value
+    if (TASK){
+        newTask (TASK, id, false)
+        list.push({
+            TASK : TASK,
+            id : id,
+            delet : false
+        });
+    };
+    id ++;
+    INPUT.reset();
+});
+
+document.addEventListener ('keyup', function(e) {
+    e.preventDefault();
+   if (e.key == 'Enter'){
+    const TASK = INPUT.value
+    if (TASK){
+        newTask (TASK, id, false)
+        list.push({
+            TASK : TASK,
+            id : id,
+            delet : false
+        });
+    };
+    id ++;
+    INPUT.reset();  
+} 
 })
-
-
-
-/*** FOOTER ***/
-
-const year = document.querySelector('#current_year');
-
-year.innerHTML = new Date().getFullYear();

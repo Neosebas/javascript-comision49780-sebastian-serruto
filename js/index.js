@@ -10,7 +10,7 @@ const BTN_ENTER = document.querySelector('#btnEnter');
 
 let list = [];
 
-let id; 
+let id= 0; 
 
 /** FUNCION FECHA DEL DIA **/
 
@@ -20,13 +20,13 @@ DATE.innerHTML = TODAY.toLocaleDateString ('es-AR', {weekday: 'long', day: "nume
 
 /** FUNCION AGREGAR TAREA **/
 
-function newTask (task, id, delet) {
-    if(delet){return};    // delete es palabra reservada, me volvi chango hasta saber por que no me funcionaba
+function newTask (task, id, deleted) {
+    if(deleted) {return};    // delete es palabra reservada, me volvi chango hasta saber por que no me funcionaba
 
     const ELEMENT = `
                 <li id="element">
                 <p>${task}</p>
-                <i class="fas fa-trash de" data="eliminado" id="${id}"></i> 
+                <img src="../assets/ico/trash_ico.svg" alt="trash_ico" class="trash" id="${id} data-="deleted"" ></img> 
                 </li>
             `
             LIST_CONT.insertAdjacentHTML("beforeend", ELEMENT);
@@ -35,11 +35,15 @@ function newTask (task, id, delet) {
 
 /** FUNCION ELIMINAR TAREA **/
 
+function taskDelete (element){
+    element.parentNode.parentNode.removeChild(element.parentNode)
+    list[element.id].deleted = true;
+}
 
 /** ESCUCHA DEL BOTON Y EL ENTER **/
 
 BTN_ENTER.addEventListener ('click',(e) =>{
-    e.preventDefault();
+    //e.preventDefault();
     
     const TASK = INPUT.value
     if (TASK){
@@ -47,26 +51,59 @@ BTN_ENTER.addEventListener ('click',(e) =>{
         list.push({
             TASK : TASK,
             id : id,
-            delet : false
+            deleted : false
         });
-    };
+    localStorage.setItem('List',JSON.stringify(LIST_CONT));
+    INPUT.value = "";
     id ++;
-    INPUT.reset();
+    };
 });
 
 document.addEventListener ('keydown', function(e) {
-    e.preventDefault();
-   if (e.key == 'Enter'){
+    //e.preventDefault();
+    if (e.key == 'Enter'){
     const TASK = INPUT.value
     if (TASK){
         newTask (TASK, id, false)
         list.push({
             TASK : TASK,
             id : id,
-            delet : false
-        });
-    };
+            deleted : false
+    });
+    localStorage.setItem('List',JSON.stringify(list));
+    INPUT.value ="";
     id ++;
-    INPUT.value ="";  
-} 
+    };
+    } 
 })
+
+/** ESCUCHA DEL BOTON ELIMINAR **/
+
+document.addEventListener ("click", function(e){
+    const ELEMENT2 = e.target;
+    const ELEMENT_DATA = ELEMENT2.getAttribute ("data");
+    
+    if(ELEMENT_DATA == 'deleted'){
+        taskDelete(ELEMENT2)
+    }
+    localStorage.setItem('List',JSON.stringify(list));
+});
+
+let data = localStorage.getItem('List');
+if(data){
+    list = JSON.parse(data)
+    id = list.length;
+    loadList('List');
+}else{
+    list = [];
+    id = 0;
+}
+
+
+/** FUNCION PARA CARGAR LISTA **/
+
+function loadList(array){
+    array.forEach(function(item){
+        newTask(item.task, item.id, item.deleted)
+    });
+}

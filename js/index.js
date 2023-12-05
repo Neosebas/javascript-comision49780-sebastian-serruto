@@ -1,109 +1,108 @@
-/** PROYECTO FIANL **/
+/**** PROYECTO FINAL ****/
 
-// VARIABLES 
+
+//  VARIABLES
 
 const DATE = document.querySelector('#date');
-const LIST_CONT = document.querySelector('#list');
-const ELEMENT = document.querySelector('#element');
 const INPUT = document.querySelector('#input');
-const BTN_ENTER = document.querySelector('#btnEnter');
+const BTN_ADD = document.querySelector('#btnEnter');
+const LIST_CONT = document.querySelector('#list');
+const EMPTY = document.querySelector ('#empty');
+const YEAR = document.querySelector('#current_year');
 
 let list = [];
+let id = 0;
 
-let id= 0; 
 
 /** FUNCION FECHA DEL DIA **/
 
 const TODAY = new Date();
 DATE.innerHTML = TODAY.toLocaleDateString ('es-AR', {weekday: 'long', day: "numeric", month:'long'});
 
+/** ESCUCHA DE BOTON Y TECLA ENTER **/
 
-/** FUNCION AGREGAR TAREA **/
+BTN_ADD.addEventListener ("click", (e) => {
+    e.preventDefault();
 
-function newTask (task, id, deleted) {
-    if(deleted) {return};    // delete es palabra reservada, me volvi chango hasta saber por que no me funcionaba
+    const TEXT = INPUT.value;
 
-    const ELEMENT = `
-                <li id="element">
-                <p>${task}</p>
-                <img src="../assets/ico/trash_ico.svg" alt="trash_ico" class="trash" id="${id} data-="deleted"" ></img> 
-                </li>
-            `
-            LIST_CONT.insertAdjacentHTML("beforeend", ELEMENT);
-};
+    if (TEXT !== "") {
+        const LI = document.createElement ('li');
+        const P = document.createElement ('p');
+        P.textContent = TEXT;
 
+        LI.appendChild (P);
+        LI.appendChild (addDeleteBtn());
+        LIST_CONT.appendChild (LI);
 
-/** FUNCION ELIMINAR TAREA **/
-
-function taskDelete (element){
-    element.parentNode.parentNode.removeChild(element.parentNode)
-    list[element.id].deleted = true;
+        INPUT.value = "";        
 }
-
-/** ESCUCHA DEL BOTON Y EL ENTER **/
-
-BTN_ENTER.addEventListener ('click',(e) =>{
-    //e.preventDefault();
-    
-    const TASK = INPUT.value
-    if (TASK){
-        newTask (TASK, id, false)
-        list.push({
-            TASK : TASK,
-            id : id,
-            deleted : false
-        });
-    localStorage.setItem('List',JSON.stringify(LIST_CONT));
-    INPUT.value = "";
-    id ++;
-    };
+    localStorage.setItem('taskList', JSON.stringify(list));
 });
 
-document.addEventListener ('keydown', function(e) {
-    //e.preventDefault();
+document.addEventListener ('keyup', function (e) {
+    e.preventDefault();
+
+    const TEXT = INPUT.value;
+
     if (e.key == 'Enter'){
-    const TASK = INPUT.value
-    if (TASK){
-        newTask (TASK, id, false)
-        list.push({
-            TASK : TASK,
-            id : id,
-            deleted : false
-    });
-    localStorage.setItem('List',JSON.stringify(list));
-    INPUT.value ="";
-    id ++;
-    };
-    } 
-})
-
-/** ESCUCHA DEL BOTON ELIMINAR **/
-
-document.addEventListener ("click", function(e){
-    const ELEMENT2 = e.target;
-    const ELEMENT_DATA = ELEMENT2.getAttribute ("data");
+        if (TEXT !== "") {
+            const LI = document.createElement ('li');
+            const P = document.createElement ('p');
+            P.textContent = TEXT;
     
-    if(ELEMENT_DATA == 'deleted'){
-        taskDelete(ELEMENT2)
+            LI.appendChild (P);
+            LI.appendChild (addDeleteBtn());
+            LIST_CONT.appendChild (LI);
+    
+            INPUT.value = "";   
+        }
     }
-    localStorage.setItem('List',JSON.stringify(list));
+    localStorage.setItem('taskList', JSON.stringify(list));
 });
 
-let data = localStorage.getItem('List');
-if(data){
-    list = JSON.parse(data)
-    id = list.length;
-    loadList('List');
-}else{
-    list = [];
-    id = 0;
+
+/** FUNCION BOTON DELETE **/
+
+function addDeleteBtn(){
+    const DELETE_BTN = document.createElement("button");
+
+    DELETE_BTN.textContent ="Eliminar tarea";
+    DELETE_BTN.className = "btnDelete";
+
+DELETE_BTN.addEventListener('click', (e) => {
+    const ITEM = e.target.parentElement;
+    LIST_CONT.removeChild(ITEM);
+
+    const ITEMS = document.querySelectorAll ('li');
+
+    localStorage.setItem('taskList', JSON.stringify(list));
+})
+    return DELETE_BTN;   
 }
 
+/*** CARGA DEL LOCALSTORAGE ***/
 
-/** FUNCION PARA CARGAR LISTA **/
+document.addEventListener('DOMContentLoaded', () => {
+    const SAVED_LIST = localStorage.getItem('taskList');
+    if (SAVED_LIST) {
+        list = JSON.parse(SAVED_LIST);
 
-function loadList(array){
-    array.forEach(function(item){
-        newTask(item.task, item.id, item.deleted)
-    });
-}
+        LIST_CONT.innerHTML = '';
+
+        list.forEach((task) => {
+            const LI = document.createElement('li');
+            const P = document.createElement('p');
+            P.textContent = task.TEXT; 
+
+            LI.appendChild(P);
+            LI.appendChild(addDeleteBtn());
+            LIST_CONT.appendChild(LI);
+        });
+    }
+});
+
+
+/*** FOOTER ***/
+
+YEAR.innerHTML = new Date().getFullYear();

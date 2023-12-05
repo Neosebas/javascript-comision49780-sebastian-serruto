@@ -9,6 +9,10 @@
 <body>
     <div class="layout">
         <header>
+            <button class="switch" id="switch">
+                <span><img src="./assets/ico/sun-solid.svg" alt="sun-solid"></span>
+                <span><img src="./assets/ico/moon-solid.svg" alt="moon-solid"></span>
+            </button>
             <h1>organiza tu dia</h1>
             <div id="date"></div>
         </header>
@@ -16,16 +20,13 @@
             <div class="addTask">
                 <form action="">
                     <input type="text" id="input" placeholder="Agregar tarea">
-                    <button class="btnAdd" id="btnEnter" type="submit">Agregar</button>
+                    <button class="btnAdd" id="btnEnter" type="submit" >Agregar</button>
                 </form>
             </div>
             <div class="liConteiner">
                 <ul id="list">
 
                 </ul>
-            </div>
-            <div class="empty">
-                <p>No tienes ninguna tarea</p>
             </div>
         </main>
         <footer>

@@ -3,6 +3,8 @@
 
 //  VARIABLES
 
+const LAYOUT = document.querySelector ('.layout');
+const BTN_SWITCH = document.querySelector('#switch');
 const DATE = document.querySelector('#date');
 const INPUT = document.querySelector('#input');
 const BTN_ADD = document.querySelector('#btnEnter');
@@ -13,6 +15,13 @@ const YEAR = document.querySelector('#current_year');
 let list = [];
 let id = 0;
 
+
+/** FUNCION MODO OSCURO **/
+
+BTN_SWITCH.addEventListener('click', () =>{
+    LAYOUT.classList.toggle('darkMode')
+    BTN_SWITCH.classList.toggle('active')
+});
 
 /** FUNCION FECHA DEL DIA **/
 

@@ -24,7 +24,7 @@ header{
     align-items: center;
 }
 .switch {
-    background-color: #007bd1;
+    background-color: #063456;
     border-radius: 62.5rem;   
     border: none;
     position: relative;
@@ -35,8 +35,8 @@ header{
 .switch::after{
     content: "";
     display: block;
-    width: 1.875rem;
-    height: 1.875rem;
+    width: 1.25rem;
+    height: 1.25rem;
     position: absolute;
     background: #ffffff;
     top: 0;
@@ -46,16 +46,20 @@ header{
     transition: .3s ease all;
     box-shadow: 0px 0px .125rem .125rem rgba(0, 0, 0,.2);
 }
+.active {
+    background: #3ca9e7;    
+}
+.active::after{
+    right: 0;
+    left: unset;
+}
 .switch span {
-    width: 1.875rem;
-    height: 1.875rem;
-    line-height: 1.875rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    line-height: 1.25rem;
     display: block;
     background: none;
-}
-switch span img {
-    width: 1.875rem;
-    height: 5rem;
+    padding-top: .0938rem;
 }
 header h1{
     color: #ffffff; 
@@ -99,11 +103,8 @@ footer{
 
 .darkMode {
     background-image: linear-gradient(to bottom, #2f1c4c, #3d2055, #4c255e, #5b2866, #6b2c6e, #77296a, #832565, #8d225f, #911b4d, #90193a, #8c1d28, #852416);
-}
-.darkMode ul {
     color: #ffffff;
 }
-
 .darkMode li {
     background-image: linear-gradient(to right, #495cb9, #635cc4, #7d5bcc, #9858d2, #b352d5);
 }

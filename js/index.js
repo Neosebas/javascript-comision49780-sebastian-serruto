@@ -83,7 +83,7 @@ document.addEventListener ('keyup', function (e) {
 function addDeleteBtn(){
     const DELETE_BTN = document.createElement("button");
 
-    DELETE_BTN.textContent ="Eliminar tarea";
+    DELETE_BTN.textContent =" ";
     DELETE_BTN.className = "btnDelete";
 
 DELETE_BTN.addEventListener('click', (e) => {

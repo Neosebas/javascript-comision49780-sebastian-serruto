@@ -20,8 +20,17 @@ header{
     width: 100%;
     grid-area: header;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
+}
+.conteinerBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 1rem;
+    margin-right: 1rem;
 }
 .switch {
     background-color: #063456;
@@ -62,6 +71,7 @@ header{
     padding-top: .0938rem;
 }
 header h1{
+    margin-top: 2.5rem;
     color: #ffffff; 
     text-transform: uppercase;
     filter: drop-shadow(.5rem .25rem .125rem #000000);  
@@ -71,12 +81,19 @@ main{
     grid-area: main;
     display: grid;
     justify-items: center;
-
+}
+.addTask {
+    max-height: 3rem;
+    margin: 3rem 0 0 0;
+}
+.liConteiner {
+    min-height: 28.125rem;
+    padding-top: 1.5rem;
 }
 ul {
+    padding: 0 3ren ;
     font: bold 1rem;
 }
-
 li {
     display: flex;
     justify-content: space-between;
@@ -87,8 +104,17 @@ li {
     border-radius: 6.25rem;
     padding: 0.5rem 1rem;
 }
-.trash:hover {
-    scale: 1.2;
+.btnDelete {
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../assets/ico/trash_ico.svg);
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: transparent;
+}
+.btnDelete:hover {
+    scale: 1.5;
 
 }
 

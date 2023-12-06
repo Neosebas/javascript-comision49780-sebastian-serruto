@@ -41,12 +41,15 @@ BTN_ADD.addEventListener ("click", (e) => {
         P.textContent = TEXT;
 
         LI.appendChild (P);
-        LI.appendChild (addDeleteBtn());
+        LI.appendChild (addDeleteBtn(LI));
         LIST_CONT.appendChild (LI);
 
+        list.push ({TEXT: TEXT});
+
+        saveListToLocalStorage(); 
+
         INPUT.value = "";        
-}
-    localStorage.setItem('taskList', JSON.stringify(list));
+    }
 });
 
 document.addEventListener ('keyup', function (e) {
@@ -61,13 +64,17 @@ document.addEventListener ('keyup', function (e) {
             P.textContent = TEXT;
     
             LI.appendChild (P);
-            LI.appendChild (addDeleteBtn());
+            LI.appendChild (addDeleteBtn(LI));
             LIST_CONT.appendChild (LI);
+
+            list.push ({TEXT: TEXT});
+
+            saveListToLocalStorage(); 
     
             INPUT.value = "";   
         }
     }
-    localStorage.setItem('taskList', JSON.stringify(list));
+
 });
 
 
@@ -85,10 +92,19 @@ DELETE_BTN.addEventListener('click', (e) => {
 
     const ITEMS = document.querySelectorAll ('li');
 
-    localStorage.setItem('taskList', JSON.stringify(list));
+    const INDEX = Array.from(LIST_CONT.children).indexOf(ITEM);
+    list.splice(INDEX, 1);
+
+    saveListToLocalStorage(); 
 })
     return DELETE_BTN;   
 }
+
+/*** FUNCION DE GUARDADO ***/
+
+function saveListToLocalStorage (){
+    localStorage.setItem('taskList', JSON.stringify(list));
+};
 
 /*** CARGA DEL LOCALSTORAGE ***/
 

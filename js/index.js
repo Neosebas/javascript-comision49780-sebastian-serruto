@@ -19,8 +19,12 @@ let id = 0;
 /** FUNCION MODO OSCURO **/
 
 BTN_SWITCH.addEventListener('click', () =>{
-    LAYOUT.classList.toggle('darkMode')
-    BTN_SWITCH.classList.toggle('active')
+    const IS_DARK_MODE = LAYOUT.classList.contains('darkMode');
+
+    LAYOUT.classList.toggle('darkMode');
+    BTN_SWITCH.classList.toggle('active');
+
+    localStorage.setItem('isDarkModeEnabled', IS_DARK_MODE ? false : true);
 });
 
 /** FUNCION FECHA DEL DIA **/
@@ -124,6 +128,16 @@ document.addEventListener('DOMContentLoaded', () => {
             LI.appendChild(addDeleteBtn());
             LIST_CONT.appendChild(LI);
         });
+    }
+});
+
+document.addEventListener('DOMContentLoaded',() => {
+    const IS_DARK_MODE_SAVED = localStorage.getItem('isDarkModeEnabled');
+
+    if (IS_DARK_MODE_SAVED !== null) {
+        const IS_DARK_MODE = IS_DARK_MODE_SAVED === 'true';
+        LAYOUT.classList.toggle ('darkMode', IS_DARK_MODE);
+        BTN_SWITCH.classList.toggle ('active', IS_DARK_MODE);
     }
 });
 

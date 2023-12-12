@@ -32,6 +32,12 @@ BTN_SWITCH.addEventListener('click', () =>{
 const TODAY = new Date();
 DATE.innerHTML = TODAY.toLocaleDateString ('es-AR', {weekday: 'long', day: "numeric", month:'long'});
 
+/**  FUNCION PARA FORMATEAR FECHAS **/
+function formatDateToString (date) {
+    return date.toLocaleDateString('es-AR', {day: "numeric", month: "numeric"});
+}
+
+
 /** ESCUCHA DE BOTON Y TECLA ENTER **/
 
 BTN_ADD.addEventListener ("click", (e) => {
@@ -42,13 +48,18 @@ BTN_ADD.addEventListener ("click", (e) => {
     if (TEXT !== "") {
         const LI = document.createElement ('li');
         const P = document.createElement ('p');
-        P.textContent = TEXT;
+        const CURRENT_DATE = new Date();
+        const FORMATTED_DATE = formatDateToString(CURRENT_DATE);
+        
+        const DATE_WITH_TEXT = FORMATTED_DATE +" "+ TEXT;
+
+        P.textContent = DATE_WITH_TEXT;
 
         LI.appendChild (P);
         LI.appendChild (addDeleteBtn(LI));
         LIST_CONT.appendChild (LI);
 
-        list.push ({TEXT: TEXT});
+        list.push ({date: FORMATTED_DATE,TEXT: TEXT});
 
         saveListToLocalStorage(); 
 
@@ -65,7 +76,13 @@ document.addEventListener ('keyup', function (e) {
         if (TEXT !== "") {
             const LI = document.createElement ('li');
             const P = document.createElement ('p');
-            P.textContent = TEXT;
+            const CURRENT_DATE = new Date();
+            const FORMATTED_DATE = formatDateToString(CURRENT_DATE);
+            
+            const DATE_WITH_TEXT = FORMATTED_DATE +" "+ TEXT;
+    
+            P.textContent = DATE_WITH_TEXT;
+
     
             LI.appendChild (P);
             LI.appendChild (addDeleteBtn(LI));
@@ -140,7 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
         list.forEach((task) => {
             const LI = document.createElement('li');
             const P = document.createElement('p');
-            P.textContent = task.TEXT; 
+            const DATE_WITH_TEXT = task.date +" "+ task.TEXT;
+
+            P.textContent = DATE_WITH_TEXT;
 
             LI.appendChild(P);
             LI.appendChild(addDeleteBtn());

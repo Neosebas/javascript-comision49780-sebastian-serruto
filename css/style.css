@@ -16,6 +16,8 @@
     background-image: linear-gradient(to bottom, #8f57eb, #4470e7, #007bd1, #057eb2, #497d92);
 }
 
+/**** HEADER  ****/
+
 header{
     width: 100%;
     grid-area: header;
@@ -77,6 +79,8 @@ header h1{
     filter: drop-shadow(.5rem .25rem .125rem #000000);  
 }
 
+/**** MAIN ****/
+
 main{
     grid-area: main;
     display: grid;
@@ -85,6 +89,17 @@ main{
 .addTask {
     max-height: 3rem;
     margin: 3rem 0 0 0;
+}
+input{
+    padding: .125rem .5rem ;
+    border-radius: 1.625rem ;
+}
+.btnAdd {
+    color: #000000;
+    padding: .125rem .5rem ;
+    border-radius: 1.625rem;
+    border: .0625rem solid #38a383;
+    background: #69c270;
 }
 .liConteiner {
     min-height: 25rem;
@@ -117,6 +132,8 @@ li {
     scale: 1.5;
 
 }
+
+/**** FOOTER ****/
 
 footer{
     grid-area: footer;

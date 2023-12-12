@@ -84,25 +84,42 @@ document.addEventListener ('keyup', function (e) {
 
 /** FUNCION BOTON DELETE **/
 
-function addDeleteBtn(){
+function addDeleteBtn() {
     const DELETE_BTN = document.createElement("button");
 
-    DELETE_BTN.textContent =" ";
+    DELETE_BTN.textContent = " "; 
     DELETE_BTN.className = "btnDelete";
 
-DELETE_BTN.addEventListener('click', (e) => {
-    const ITEM = e.target.parentElement;
-    LIST_CONT.removeChild(ITEM);
+    DELETE_BTN.addEventListener('click', (e) => {
+        const ITEM = e.target.parentElement;
+        const INDEX = Array.from(LIST_CONT.children).indexOf(ITEM);
 
-    const ITEMS = document.querySelectorAll ('li');
+        Swal.fire({
+            title: "Atencion",
+            text: "¿Estas seguro de que quieres eliminar esta tarea?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si !"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                LIST_CONT.removeChild(ITEM);
+                list.splice(INDEX, 1);
+                saveListToLocalStorage();
 
-    const INDEX = Array.from(LIST_CONT.children).indexOf(ITEM);
-    list.splice(INDEX, 1);
+                Swal.fire({
+                    title: "Listo",
+                    text: "Tu tarea se elimino correctamente.",
+                    icon: "success"
+                });
+            }
+        });
+    });
 
-    saveListToLocalStorage(); 
-})
-    return DELETE_BTN;   
+    return DELETE_BTN;
 }
+
 
 /*** FUNCION DE GUARDADO ***/
 

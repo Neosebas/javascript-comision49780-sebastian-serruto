@@ -98,6 +98,7 @@ function addDeleteBtn() {
             title: "Atencion",
             text: "¿Estas seguro de que quieres eliminar esta tarea?",
             icon: "warning",
+            iconColor: "red",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",

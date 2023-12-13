@@ -93,7 +93,6 @@ main{
 input{
     padding: .125rem .5rem ;
     border-radius: 1.625rem ;
-    maxlength: 18.75rem;
 }
 .btnAdd {
     color: #000000;

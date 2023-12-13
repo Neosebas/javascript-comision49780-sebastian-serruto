@@ -93,6 +93,7 @@ main{
 input{
     padding: .125rem .5rem ;
     border-radius: 1.625rem ;
+    maxlength: 18.75rem;
 }
 .btnAdd {
     color: #000000;
@@ -108,11 +109,12 @@ input{
 ul {
     padding: 0 3ren ;
     font: bold 1rem;
+    max-width: 21.25rem;
 }
 li {
     display: flex;
     justify-content: space-between;
-    min-width: 300px;
+    min-width: 300px; 
     gap: 2rem;
     background-image: linear-gradient(to right, #49b97b, #69c270, #88c965, #a8d05a, #c9d552);    margin-bottom: .5rem;
     text-decoration: none;

@@ -51,7 +51,7 @@ BTN_ADD.addEventListener ("click", (e) => {
         const CURRENT_DATE = new Date();
         const FORMATTED_DATE = formatDateToString(CURRENT_DATE);
         
-        const DATE_WITH_TEXT = FORMATTED_DATE +" "+ TEXT;
+        const DATE_WITH_TEXT = FORMATTED_DATE +": "+ TEXT;
 
         P.textContent = DATE_WITH_TEXT;
 
@@ -79,7 +79,7 @@ document.addEventListener ('keyup', function (e) {
             const CURRENT_DATE = new Date();
             const FORMATTED_DATE = formatDateToString(CURRENT_DATE);
             
-            const DATE_WITH_TEXT = FORMATTED_DATE +" "+ TEXT;
+            const DATE_WITH_TEXT = FORMATTED_DATE +": "+ TEXT;
     
             P.textContent = DATE_WITH_TEXT;
 
